@@ -489,10 +489,25 @@
     const mainSearch = document.getElementById('mainSearch');
     const appItems = document.querySelectorAll('.app-item');
     
+    // Sites that don't allow iframe embedding
+    const blockedSites = ['google.com', 'youtube.com', 'facebook.com', 'instagram.com', 'twitter.com'];
+    
+    function isBlocked(url) {
+      return blockedSites.some(site => url.includes(site));
+    }
+    
     function loadUrl(url) {
       if (!url.startsWith('http://') && !url.startsWith('https://')) {
         url = 'https://' + url;
       }
+      
+      // Check if site blocks iframes
+      if (isBlocked(url)) {
+        // Open in new window/tab
+        window.open(url, '_blank');
+        return;
+      }
+      
       browserFrame.src = url;
       browserUrl.value = url;
       homeScreen.style.display = 'none';
