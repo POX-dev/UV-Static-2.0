@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <!--
+  
+
+██╗    ██╗   ██╗
+██║    ██║   ██║
+██║    ██║   ██║
+██║    ╚██╗ ██╔╝
+███████╗╚████╔╝ 
+╚══════╝ ╚═══╝  
+                
+                        
+
 By LupineVault.com
 All images and code are owned by LupineVault (lupinevault.com) and associated developers.
 © 2025 LupineVault and all associated developers.
 
-UV Static 2.0 - Redesigned
+UV Static 2.0
+-
+Developed by technonyte0
 -->
 <html lang="en">
   <head>
@@ -16,6 +29,7 @@ UV Static 2.0 - Redesigned
 
     <link rel="stylesheet" href="style/global.css" />
     <link rel="stylesheet" href="style/browser.css" />
+    
 
     <script
       type="text/javascript"
@@ -34,247 +48,11 @@ UV Static 2.0 - Redesigned
     <script src="uv/uv.bundle.js" defer></script>
     <script src="uv/uv.config.js" defer></script>
     <script src="scripts/tabs.mjs" type="module" defer></script>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/gh/tf7software/Font-Awesome-pro-cdn@main/js/all.js"></script>
-    
     <style>
-      body {
-        padding: 0;
-        margin: 0;
-        font-family: 'Inter', sans-serif;
-        background: #0a0a0a;
-        color: #fff;
-        overflow: hidden;
-      }
-
-      /* Hide original UI initially */
-      #tab-view,
-      .sidebar-container,
-      #menu-overlay {
-        display: none;
-      }
-
-      /* Animated background canvas */
-      #bgCanvas {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-        pointer-events: none;
-      }
-
-      /* Home screen */
-      #home-screen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 1;
-        padding: 20px;
-      }
-
-      #home-screen.hidden {
-        display: none;
-      }
-
-      /* Show browser UI when home is hidden */
-      #home-screen.hidden ~ #tab-view,
-      #home-screen.hidden ~ .sidebar-container,
-      #home-screen.hidden ~ #menu-overlay {
-        display: block;
-      }
-
-      /* Logo */
-      .logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 40px;
-        animation: fadeInDown 0.8s ease-out;
-      }
-
-      .logo-icon {
-        font-size: 48px;
-      }
-
-      .logo-text {
-        font-family: 'Pacifico', cursive;
-        font-size: 42px;
-        color: #fff;
-        letter-spacing: 2px;
-      }
-
-      /* Search container */
-      .search-container {
-        width: 100%;
-        max-width: 650px;
-        margin-bottom: 30px;
-        animation: fadeInUp 0.8s ease-out 0.2s both;
-      }
-
-      .search-bar {
-        width: 100%;
-        padding: 18px 25px;
-        background: rgba(20, 20, 20, 0.8);
-        border: 2px solid #ff8c00;
-        border-radius: 12px;
-        color: #fff;
-        font-size: 16px;
-        outline: none;
-        transition: all 0.3s ease;
-        backdrop-filter: blur(10px);
-      }
-
-      .search-bar::placeholder {
-        color: #666;
-      }
-
-      .search-bar:focus {
-        border-color: #ffa500;
-        box-shadow: 0 0 20px rgba(255, 140, 0, 0.3);
-        background: rgba(30, 30, 30, 0.9);
-      }
-
-      /* Settings button */
-      .settings-btn {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        background: transparent;
-        border: none;
-        color: #999;
-        font-size: 14px;
-        cursor: pointer;
-        margin-bottom: 40px;
-        transition: color 0.3s ease;
-        animation: fadeIn 0.8s ease-out 0.4s both;
-      }
-
-      .settings-btn:hover {
-        color: #fff;
-      }
-
-      /* Tagline */
-      .tagline {
-        font-size: 16px;
-        color: #ff8c00;
-        font-style: italic;
-        margin-bottom: 40px;
-        animation: fadeIn 0.8s ease-out 0.6s both;
-      }
-
-      /* App grid */
-      .app-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        max-width: 600px;
-        animation: fadeInUp 0.8s ease-out 0.8s both;
-      }
-
-      .app-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-        padding: 20px;
-        background: rgba(30, 30, 30, 0.6);
-        border-radius: 16px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
-        text-decoration: none;
-        color: #fff;
-        backdrop-filter: blur(10px);
-      }
-
-      .app-item:hover {
-        background: rgba(40, 40, 40, 0.8);
-        transform: translateY(-5px);
-        border-color: #ff8c00;
-        box-shadow: 0 10px 30px rgba(255, 140, 0, 0.2);
-      }
-
-      .app-icon {
-        width: 60px;
-        height: 60px;
-        border-radius: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 32px;
-        transition: transform 0.3s ease;
-      }
-
-      .app-item:hover .app-icon {
-        transform: scale(1.1);
-      }
-
-      .app-name {
-        font-size: 14px;
-        font-weight: 500;
-        color: #ccc;
-      }
-
-      /* Animations */
-      @keyframes fadeInDown {
-        from {
-          opacity: 0;
-          transform: translateY(-30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-
-      /* Responsive */
-      @media (max-width: 768px) {
-        .app-grid {
-          grid-template-columns: repeat(3, 1fr);
-          gap: 15px;
-        }
-        
-        .logo-text {
-          font-size: 32px;
-        }
-        
-        .logo-icon {
-          font-size: 36px;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .app-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
+      body {padding: 0;margin: 0;}
     </style>
-    
     <script>
       window.onload = function () {
         if (!localStorage.getItem("discordAlertShown")) {
@@ -286,108 +64,21 @@ UV Static 2.0 - Redesigned
   </head>
 
   <body>
-    <!-- Animated background -->
-    <canvas id="bgCanvas"></canvas>
-
-    <!-- Home Screen -->
-    <div id="home-screen">
-      <div class="logo">
-        <span class="logo-icon">⚡</span>
-        <span class="logo-text">unemployment central</span>
-      </div>
-
-      <div class="search-container">
-        <input 
-          type="text" 
-          class="search-bar" 
-          id="home-search"
-          placeholder="Search or enter a site URL"
-          autocomplete="off"
-          autocorrect="off"
-          spellcheck="false"
-        >
-      </div>
-
-      <button class="settings-btn" onclick="alert('Settings coming soon!')">
-        <ion-icon name="settings-outline"></ion-icon>
-        <span>Settings</span>
-      </button>
-
-      <div class="tagline">you failed your job application, is that why you're here?</div>
-
-      <div class="app-grid">
-        <div class="app-item" data-url="https://youtube.com">
-          <div class="app-icon" style="background: #ff0000;">
-            <ion-icon name="logo-youtube" style="color: white;"></ion-icon>
-          </div>
-          <span class="app-name">YouTube</span>
-        </div>
-
-        <div class="app-item" data-url="https://github.com">
-          <div class="app-icon" style="background: #333;">
-            <ion-icon name="logo-github" style="color: white;"></ion-icon>
-          </div>
-          <span class="app-name">GitHub</span>
-        </div>
-
-        <div class="app-item" data-url="https://discord.com">
-          <div class="app-icon" style="background: #5865f2;">
-            <ion-icon name="logo-discord" style="color: white;"></ion-icon>
-          </div>
-          <span class="app-name">Discord</span>
-        </div>
-
-        <div class="app-item" data-url="https://tiktok.com">
-          <div class="app-icon" style="background: linear-gradient(45deg, #00f2ea, #ff0050);">
-            <ion-icon name="musical-notes" style="color: white;"></ion-icon>
-          </div>
-          <span class="app-name">TikTok</span>
-        </div>
-
-        <div class="app-item" data-url="https://google.com">
-          <div class="app-icon" style="background: #4285f4;">
-            <ion-icon name="logo-google" style="color: white;"></ion-icon>
-          </div>
-          <span class="app-name">Google</span>
-        </div>
-
-        <div class="app-item" data-url="https://twitter.com">
-          <div class="app-icon" style="background: #000;">
-            <ion-icon name="logo-twitter" style="color: white;"></ion-icon>
-          </div>
-          <span class="app-name">Twitter/X</span>
-        </div>
-
-        <div class="app-item" data-url="https://now.gg">
-          <div class="app-icon" style="background: #7c3aed;">
-            <ion-icon name="game-controller" style="color: white;"></ion-icon>
-          </div>
-          <span class="app-name">Games</span>
-        </div>
-
-        <div class="app-item" data-url="https://now.gg">
-          <div class="app-icon" style="background: #84cc16;">
-            <ion-icon name="flash" style="color: white;"></ion-icon>
-          </div>
-          <span class="app-name">GeForce Now</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Original browser UI (hidden initially) -->
     <div id="small-screen-overlay">
       UV Static 2.0 doesn't support smaller screens. Please use UV Static 2.0 on a larger screen.
     </div>
 
-    <div id="nav"></div>
-    <div id="main-content"></div>
+
+  <div id="nav"></div>
+  <div id="main-content"></div>
+
 
     <div id="tab-view" class=""></div>
     <div class="sidebar-container">
       <header>
         <div class="page-data">
           <span id="controls">
-            <button id="home-btn-browser">
+            <button onclick="window.location.href='/'">
               <?xml version="1.0" encoding="UTF-8" standalone="no"?>
               <svg
    width="38.454208mm"
@@ -414,8 +105,12 @@ UV Static 2.0 - Redesigned
          y="161.25397">v2</tspan></text>
   </g>
 </svg>
+
+           
+
               <p class="tooltip">Home</p>
             </button>
+            <!-- <p class="logo-name">RED Browse</p> -->
             <span>
               <button id="page-back">
                 <ion-icon
@@ -473,135 +168,12 @@ UV Static 2.0 - Redesigned
       <div class="option" id="abc-option">Open in about:blank</div>
       <div class="option" id="git-option">GitHub</div>
     </div>
-
     <script>
-      // Animated background
-      const canvas = document.getElementById('bgCanvas');
-      const ctx = canvas.getContext('2d');
-      
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-
-      const particles = [];
-      const particleCount = 100;
-
-      for (let i = 0; i < particleCount; i++) {
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          radius: Math.random() * 2 + 1
-        });
-      }
-
-      function animate() {
-        ctx.fillStyle = 'rgba(10, 10, 10, 0.1)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        particles.forEach((p, i) => {
-          p.x += p.vx;
-          p.y += p.vy;
-
-          if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-          if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(255, 140, 0, 0.3)';
-          ctx.fill();
-
-          for (let j = i + 1; j < particles.length; j++) {
-            const p2 = particles[j];
-            const dx = p.x - p2.x;
-            const dy = p.y - p2.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-
-            if (dist < 150) {
-              ctx.beginPath();
-              ctx.moveTo(p.x, p.y);
-              ctx.lineTo(p2.x, p2.y);
-              ctx.strokeStyle = `rgba(255, 140, 0, ${0.2 * (1 - dist / 150)})`;
-              ctx.lineWidth = 1;
-              ctx.stroke();
-            }
-          }
-        });
-
-        requestAnimationFrame(animate);
-      }
-
-      animate();
-
-      window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      });
-
-      // Home screen functionality
-      const homeScreen = document.getElementById('home-screen');
-      const homeSearch = document.getElementById('home-search');
-      const urlInput = document.getElementById('url-input');
-      const urlForm = document.getElementById('url-form');
-      const appItems = document.querySelectorAll('.app-item');
-
-      // Function to navigate from home screen
-      function navigateFromHome(url) {
-        // Add URL to the browser's URL input
-        if (urlInput) {
-          urlInput.value = url;
-          // Hide home screen
-          homeScreen.classList.add('hidden');
-          // Trigger the existing UV navigation
-          urlForm.dispatchEvent(new Event('submit'));
-        }
-      }
-
-      // Home search functionality
-      homeSearch.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' && homeSearch.value.trim()) {
-          const query = homeSearch.value.trim();
-          let url = query;
-          
-          // If it doesn't look like a URL, search with Google
-          if (!query.includes('.') || query.includes(' ')) {
-            url = 'https://www.google.com/search?q=' + encodeURIComponent(query);
-          } else if (!query.startsWith('http://') && !query.startsWith('https://')) {
-            url = 'https://' + query;
-          }
-          
-          navigateFromHome(url);
-        }
-      });
-
-      // App item clicks
-      appItems.forEach(item => {
-        item.addEventListener('click', () => {
-          const url = item.dataset.url;
-          if (url) {
-            navigateFromHome(url);
-          }
-        });
-      });
-
-      // Home button in browser goes back to home screen
-      const homeBtnBrowser = document.getElementById('home-btn-browser');
-      if (homeBtnBrowser) {
-        homeBtnBrowser.addEventListener('click', (e) => {
-          e.preventDefault();
-          homeScreen.classList.remove('hidden');
-          homeSearch.value = '';
-        });
-      }
-
-      // Options menu toggle
       const optionsBtn = document.getElementById("options-btn");
       const overlay = document.getElementById("menu-overlay");
-      if (optionsBtn && overlay) {
-        optionsBtn.addEventListener("click", () => {
-          overlay.classList.toggle("active");
-        });
-      }
+      optionsBtn.addEventListener("click", () => {
+        overlay.classList.toggle("active");
+      });
     </script>
   </body>
 </html>
